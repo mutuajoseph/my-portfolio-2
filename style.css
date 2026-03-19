@@ -1,108 +1,121 @@
 /* ═══════════════════════════════════════════════════════════════════
-  This file styles our portfolio page. We work through it section by
-  section, from top to bottom of the page.
+   Portfolio Styles
+   ═══════════════════════════════════════════════════════════════════
+   This stylesheet is written to be easy to study.
 
-  KEY CONCEPTS WE'RE USING:
-  ─────────────────────────
-  • Flexbox    → Arranging items in rows or columns (header, hero, nav)
-  • Grid       → Two-column layout for the About Me section
-  • border-radius → Rounded corners (50px = pill, 50% = circle)
-  • transform  → Slight rotation on badges for a "sticker" look
+   KEY RESPONSIVE IDEA:
+   We start with a desktop-friendly layout, then use media queries
+   to adjust spacing, direction and width as the screen gets smaller.
 */
 
 /* ═══════════════════════════════════════════════════════════════════
-   1. RESET & BASE STYLES
+   1. RESET & GLOBAL STYLES
    ═══════════════════════════════════════════════════════════════════
-   Browsers add default margins and padding to elements. We reset
-   these so we have full control over spacing. We also set up our
-   base font and colors for the whole page.
+   Reset browser defaults so spacing behaves consistently.
 */
 
 * {
-  margin: 0; /* Remove default spacing outside elements */
-  padding: 0; /* Remove default spacing inside elements */
-  box-sizing: border-box; /* Include padding and border in element's total width and height */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Body: our base styles for the entire page */
 body {
   font-family: Arial, Helvetica, sans-serif;
-  color: black;
+  color: #111;
   line-height: 1.5;
+  background-color: #fff;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   2. MAIN CONTAINER
+   2. PAGE CONTAINER
    ═══════════════════════════════════════════════════════════════════
-   The <main> tag wraps all our page content. We limit its width
-   so the layout doesn't stretch too wide on large screens, and
-   center it on the page.
+   The page shell keeps content centered and stops lines from
+   becoming too wide on large screens.
 */
 
-main {
-  max-width: 1200px; /* Don't let content get wider than 1200px */
-  margin: 0 auto; /* 0 = no top/bottom margin, auto = center left/right */
-  padding: 20px; /* Space between content and edges */
+.page-shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   3. HEADER (Top Bar)
+   3. HEADER
    ═══════════════════════════════════════════════════════════════════
-   Layout: Email on the LEFT, social links on the RIGHT.
-   Flexbox with justify-content: space-between pushes them apart.
+   Flexbox places the email on one side and the links on the other.
+   We also allow wrapping so the links do not break the layout.
 */
 
-header {
+.site-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
+  gap: 20px;
+  padding: 20px 0 32px;
 }
 
-header h2 {
+.contact-email h2 {
   font-size: 1rem;
   font-weight: normal;
 }
 
-header nav ul {
+.social-nav ul,
+.hero-nav ul,
+.footer-nav ul {
   list-style: none;
   display: flex;
-  gap: 20px;
+  align-items: center;
 }
 
-header nav a {
-  color: black;
-  text-decoration: none;
+.social-nav ul {
+  gap: 20px;
+  flex-wrap: wrap; /* Lets links move to a new line on narrower screens */
+  justify-content: flex-end;
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   4. HERO SECTION (Top Half of Page)
+   4. HERO SECTION
    ═══════════════════════════════════════════════════════════════════
-   Contains: profile image, name badge, tagline, CV button, nav bar.
-   Everything is centered in a vertical column.
-   Selector: main > section:first-of-type = "the first section inside main"
+   This section stacks content vertically and keeps everything centered.
 */
 
-main > section:first-of-type {
+.hero-section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 60px 20px;
+  gap: 24px;
+  padding: 60px 24px;
   background-color: #f5f5f5;
   border-radius: 20px;
   margin-bottom: 40px;
 }
 
-main > section:first-of-type img {
+.hero-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero-image img {
   width: 150px;
   height: 150px;
   object-fit: cover;
-  margin-bottom: 15px;
   border-radius: 50%;
 }
 
-main > section:first-of-type p {
-  background-color: white;
+.hero-name p {
+  background-color: #fff;
   padding: 8px 20px;
   border-radius: 50px;
   display: inline-block;
@@ -110,84 +123,199 @@ main > section:first-of-type p {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-main > section:first-of-type h1 {
-  font-size: 2rem;
-  text-align: center;
-  max-width: 600px;
-  margin: 10px 25px;
-  line-height: 1.3;
-}
-
-main > section:first-of-type button {
-  background-color: #000;
-  color: white;
-  border: none;
-  padding: 12px 28px;
-  font-size: 1rem;
-  cursor: pointer;
-  margin-bottom: 15px;
-  border-radius: 50px;
-}
-
-main > section:first-of-type nav {
-  background-color: white;
-  padding: 12px 24px;
-  border-radius: 50px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-main > section:first-of-type nav ul {
-  list-style: none;
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-main > section:first-of-type nav a {
-  color: black;
-  text-decoration: none;
-  padding: 8px 16px;
-  border-radius: 50px;
-  font-size: 0.9rem;
-}
-
 .hero-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  width: 100%;
+}
+
+.hero-content h1 {
+  font-size: 2rem;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 25px;
+  line-height: 1.3;
+}
+
+.hero-content button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 12px 28px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 50px;
+}
+
+.hero-nav {
+  width: min(100%, 720px); /* Stops the nav from getting too wide */
+  background-color: #fff;
+  padding: 12px 24px;
+  border-radius: 50px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hero-nav ul {
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap; /* Important for tablets: menu items can wrap neatly */
+}
+
+.hero-nav a {
+  display: block;
+  color: #111;
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-size: 0.95rem;
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   5. ABOUT ME SECTION (Bottom Half)
+   5. ABOUT SECTION
    ═══════════════════════════════════════════════════════════════════
-   Layout: "About Me" badge on top, then two columns: IMAGE | TEXT.
-   We use CSS Grid - think of it like a table with rows and columns.
-   Selector: main > section:last-of-type = "the last section inside main"
+   Grid gives us two columns on larger screens:
+   image on one side, text on the other.
 */
 
-main > section:last-of-type {
+.about-section {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(280px, 420px) 1fr;
   gap: 40px;
   align-items: center;
-  padding: 8px 20px;
+  padding: 8px 20px 40px;
 }
 
-footer {
+.about-image img {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 24px;
+}
+
+.about-text p {
+  max-width: 65ch; /* Keeps the paragraph readable instead of too wide */
+  font-size: 1.05rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   6. FOOTER
+   ═══════════════════════════════════════════════════════════════════
+   Footer links stay centered and can wrap if space is limited.
+*/
+
+.site-footer {
   text-align: center;
   padding: 30px 0;
-  border-top: 1px solid #eee; /* Thin light gray line above footer */
+  border-top: 1px solid #eee;
 }
 
-footer nav ul {
-  list-style: none;
-  display: flex;
+.footer-nav ul {
   justify-content: center;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
-footer nav a {
-  color: #000;
-  text-decoration: none;
+/* ═══════════════════════════════════════════════════════════════════
+   7. TABLET BREAKPOINT
+   ═══════════════════════════════════════════════════════════════════
+   At 900px and below, side-by-side layouts become tighter.
+   We stack the header and About section to give content more room.
+*/
+
+@media (max-width:900px) {
+  .page-shell {
+    padding: 20px;
+  }
+
+  .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 24px;
+  }
+
+  .social-nav ul {
+    justify-content: flex-start;
+  }
+
+  .hero-section {
+    padding: 48px 20px;
+  }
+
+  .about-section {
+    grid-template-columns: 1fr; /* Change from 2 columns to 1 column */
+    gap: 28px;
+    text-align: center;
+  }
+
+  .about-text p {
+    margin: 0 auto;
+  }
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   8. MOBILE BREAKPOINT
+   ═══════════════════════════════════════════════════════════════════
+   On phones we reduce spacing and turn the hero navigation into
+   a vertical list so each link has enough tap space.
+   600px is a common breakpoint for mobile devices, but you can adjust
+   this as needed based on your design.
+*/
+
+@media (max-width:600px) {
+  .page-shell {
+    padding: 16px;
+  }
+
+  .site-header {
+    gap: 16px;
+  }
+
+  .hero-section {
+    padding: 36px 16px;
+    border-radius: 16px;
+  }
+
+  .hero-image img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .hero-content h1 {
+    font-size: 1.8rem;
+    margin: 0;
+  }
+
+  .hero-content button {
+    width: 100%;
+    max-width: 240px;
+  }
+
+  .hero-nav {
+    width: 100%;
+    padding: 14px;
+    border-radius: 24px;
+  }
+
+  .hero-nav ul {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .hero-nav a {
+    width: 100%;
+    text-align: center;
+  }
+
+  .about-section {
+    padding: 0 0 32px;
+  }
+
+  .about-text p {
+    font-size: 1rem;
+  }
+}
+
+
